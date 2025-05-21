@@ -7,7 +7,7 @@ use App\Http\Controllers\TransactionController;
 
 Route::prefix('transactions')->group(function () {
     Route::get('/', [TransactionController::class, 'index']);
-    Route::get('/create', [TransactionController::class, 'create']); // optional
+    Route::post('/create', [TransactionController::class, 'store']); // optional
     Route::post('/', [TransactionController::class, 'store']);
 });
 
