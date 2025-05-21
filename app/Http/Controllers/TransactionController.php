@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -19,7 +18,7 @@ class TransactionController extends Controller
         if ($filter === 'daily') {
             $query->whereDate('transaction_date', $now);
         } elseif ($filter === 'weekly') {
-            $query->whereBetween('transaction_date', [$now->startOfWeek(), $now->endOfWeek()]);
+            $query->whereBetween('transaction_date', [(clone $now)->startOfWeek(), (clone $now)->endOfWeek()]);
         } elseif ($filter === 'monthly') {
             $query->whereMonth('transaction_date', $now->month)
                   ->whereYear('transaction_date', $now->year);
@@ -32,7 +31,13 @@ class TransactionController extends Controller
         $balance = $income - $expense;
 
         return response()->json([
-            'transactions' => $transactions,
+            'transactions' => $transactions->items(),   // sahifadagi transaksiyalar
+            'pagination' => [
+                'current_page' => $transactions->currentPage(),
+                'last_page' => $transactions->lastPage(),
+                'per_page' => $transactions->perPage(),
+                'total' => $transactions->total(),
+            ],
             'filter' => $filter,
             'income' => $income,
             'expense' => $expense,
@@ -40,12 +45,11 @@ class TransactionController extends Controller
         ]);
     }
 
-    // API da `create` odatda kerak emas, lekin agar kerak bo'lsa:
     public function create(Request $request)
     {
         $categories = ['Uy', 'Transport', 'Oziq-ovqat', 'Daromad', 'Boshqa'];
         $type = $request->query('type', 'income');
-        
+        // API da ko‘pincha create faqat kategoriyalar va tip uchun json qaytariladi
         return response()->json([
             'type' => $type,
             'categories' => $categories,
@@ -59,6 +63,7 @@ class TransactionController extends Controller
             'name' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
             'amount' => 'required|numeric|min:0.01',
+            'description' => 'nullable|string|max:1000',
             'transaction_date' => 'required|date',
         ]);
 
@@ -68,5 +73,13 @@ class TransactionController extends Controller
             'message' => 'Transaction muvaffaqiyatli qo‘shildi!',
             'transaction' => $transaction,
         ], 201);
+    }
+
+    public function show($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        return response()->json([
+            'transaction' => $transaction,
+        ]);
     }
 }

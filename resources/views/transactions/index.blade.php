@@ -30,6 +30,7 @@
                 <th>Sana</th>
                 <th>Nomi</th>
                 <th>Kategoriya</th>
+                <th>Izoh</th> <!-- Izoh ustuni qo‘shildi -->
                 <th>Tur</th>
                 <th>Qiymat ($)</th>
             </tr>
@@ -38,8 +39,9 @@
             @forelse($transactions as $transaction)
             <tr>
                 <td>{{ $transaction->transaction_date->format('Y-m-d') }}</td>
-                <td>{{ $transaction->name }}</td>
+                <td>{{ $transaction->name ?? '-'}}</td>
                 <td>{{ $transaction->category ?? '—' }}</td>
+                <td>{{ $transaction->description }}</td> <!-- Izoh chiqadi -->
                 <td>
                     @if($transaction->type === 'income')
                         <span class="text-success">Kirim</span>
@@ -57,7 +59,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="5" class="text-center">Hech qanday transaksiyalar mavjud emas.</td>
+                <td colspan="6" class="text-center">Hech qanday transaksiyalar mavjud emas.</td>
             </tr>
             @endforelse
         </tbody>

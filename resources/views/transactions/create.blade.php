@@ -35,6 +35,12 @@
             <input type="number" step="0.01" name="amount" id="amount" class="form-control" value="{{ old('amount') }}" required>
             @error('amount')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
+        <div class="mb-3">
+    <label for="description" class="form-label">Izoh</label>
+    <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+    @error('description')<div class="text-danger">{{ $message }}</div>@enderror
+</div>
+
 
         <div class="mb-3">
             <label for="transaction_date" class="form-label">Sana</label>
