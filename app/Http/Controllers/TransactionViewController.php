@@ -46,7 +46,7 @@ class TransactionViewController extends Controller
             'type'             => 'required|in:income,expense',
             'name'             => 'required|string|max:255',
             'category'         => 'nullable|string|max:255',
-            'amount'           => 'required|numeric|min:0.01|max:1000000000000000073575873847711249839757606215217745679924585790135175914380219020205067965615308.00',
+            'amount'           => 'required|numeric|min:0.01|max:100000000000000000000000000000000000000000000000000000000000000000000.00',
             'description'      => 'nullable|string|max:1000',
             'transaction_date' => 'required|date',
         ]);
