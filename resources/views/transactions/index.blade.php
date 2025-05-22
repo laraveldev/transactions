@@ -12,7 +12,6 @@
         <a href="{{ route('transactions.index', ['filter' => 'daily']) }}" class="btn btn-outline-primary {{ $filter === 'daily' ? 'active' : '' }}">Kunlik</a>
         <a href="{{ route('transactions.index', ['filter' => 'weekly']) }}" class="btn btn-outline-primary {{ $filter === 'weekly' ? 'active' : '' }}">Haftalik</a>
         <a href="{{ route('transactions.index', ['filter' => 'monthly']) }}" class="btn btn-outline-primary {{ $filter === 'monthly' ? 'active' : '' }}">Oylik</a>
-        <a href="{{ route('transactions.index') }}" class="btn btn-outline-secondary {{ !in_array($filter, ['daily','weekly','monthly']) ? 'active' : '' }}">Barchasi</a>
     </div>
 
     <div class="mb-3">
