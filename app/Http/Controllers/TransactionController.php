@@ -34,12 +34,12 @@ class TransactionController extends Controller
             'transactions' => $transactions->items(),   // sahifadagi transaksiyalar
             'pagination' => [
                 'current_page' => $transactions->currentPage(),
-                'last_page' => $transactions->lastPage(),
-                'per_page' => $transactions->perPage(),
-                'total' => $transactions->total(),
+                'last_page'    => $transactions->lastPage(),
+                'per_page'     => $transactions->perPage(),
+                'total'        => $transactions->total(),
             ],
-            'filter' => $filter,
-            'income' => $income,
+            'filter'  => $filter,
+            'income'  => $income,
             'expense' => $expense,
             'balance' => $balance,
         ]);
@@ -59,18 +59,18 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'type' => 'required|in:income,expense',
-            'name' => 'required|string|max:255',
-            'category' => 'nullable|string|max:255',
-            'amount' => 'required|min:0.01',
-            'description' => 'nullable|string|max:1000',
+            'type'             => 'required|in:income,expense',
+            'name'             => 'required|string|max:255',
+            'category'         => 'nullable|string|max:255',
+            'amount'           => 'required|min:0.01',
+            'description'      => 'nullable|string|max:1000',
             'transaction_date' => 'required|date',
         ]);
 
         $transaction = Transaction::create($data);
 
         return response()->json([
-            'message' => 'Transaction muvaffaqiyatli qo‘shildi!',
+            'message'     => 'Transaction muvaffaqiyatli qo‘shildi!',
             'transaction' => $transaction,
         ], 201);
     }
