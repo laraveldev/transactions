@@ -74,12 +74,4 @@ class TransactionController extends Controller
             'transaction' => $transaction,
         ], 201);
     }
-
-    public function show($id)
-    {
-        $transaction = Transaction::findOrFail($id);
-        return response()->json([
-            'transaction' => $transaction,
-        ]);
-    }
 }

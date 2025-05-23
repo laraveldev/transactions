@@ -9,10 +9,10 @@ class Transaction extends Model
     protected $fillable = [
         'type', 'name', 'category', 'amount', 'description', 'transaction_date',
     ];
-protected $casts = [
+    protected $casts = [
     'transaction_date' => 'datetime',
     'created_at' => 'datetime',
     'updated_at' => 'datetime',
-];
+    ];
 
 }
