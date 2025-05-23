@@ -11,8 +11,8 @@ class Transaction extends Model
     ];
     protected $casts = [
     'transaction_date' => 'datetime',
-    'created_at' => 'datetime',
-    'updated_at' => 'datetime',
+    'created_at'       => 'datetime',
+    'updated_at'       => 'datetime',
     ];
 
 }

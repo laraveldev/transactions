@@ -51,7 +51,7 @@ class TransactionController extends Controller
         $type = $request->query('type', 'income');
         // API da ko‘pincha create faqat kategoriyalar va tip uchun json qaytariladi
         return response()->json([
-            'type' => $type,
+            'type'       => $type,
             'categories' => $categories,
         ]);
     }

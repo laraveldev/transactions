@@ -8,16 +8,14 @@ use App\Http\Controllers\TransactionController;
 Route::prefix('transactions')->group(function () {
     Route::get('/', [TransactionController::class, 'index']);
     Route::post('/create', [TransactionController::class, 'store']); // optional
-    Route::post('/', [TransactionController::class, 'store']);
+    
 });
 
 
 
 
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 
 
 
